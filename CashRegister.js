@@ -24,16 +24,37 @@ One-hundred Dollars	$100 (ONE HUNDRED)
 */
 
 const checkCashRegister = (price, cash, cid) => {
+  const denominations = [
+    ["onehundreddollars", 100],
+    ["twentydollars", 20],
+    ["tendollars", 10],
+    ["fivedollars", 5],
+    ["onedollar", 1],
+    ["quarter", 0.25],
+    ["dime", 0.1],
+    ["nickel", 0.05],
+    ["penny", 0.01]
+  ];
   let cidTotal = 0;
-  let status;
+  const output = {
+    status: null,
+    change: []
+  }
   let change = cash - price;
-  const cashObject = {
-    price,
-    cash,
-    cid,
-    change,
-    status
-  };
+
+  const calculateNumCoins = (change) => {
+    for(let i = 0; i < denominations.length; i++) {
+      if (change === 0) {
+        
+      };
+      if (change / denominations[i][1] > 0) {
+        while (change / denominations[i][1] >= 1) {
+          change -= denominations[i][1];
+          console.log(denominations[i][0]);
+        }
+      }
+    }
+  }
 
   const calculatecidTotal = (cid, cidTotal) => {
     for(let i = 0; i < cid.length; i++) {
@@ -46,27 +67,14 @@ const checkCashRegister = (price, cash, cid) => {
   console.log(cidTotal);
 
   if (cidTotal < change) {
-    status = "INSUFFICIENT FUNDS";
-    change = [];
+    output.status = "INSUFFICIENT FUNDS";
+    output.change = [];
   }
 
-  return (
-    { 
-      status,
-      change
-    });
+  calculateNumCoins(change, cid);
+
+  return output;
 }
-  
-// Example cash-in-drawer array:
-// [["PENNY", 1.01],
-// ["NICKEL", 2.05],
-// ["DIME", 3.1],
-// ["QUARTER", 4.25],
-// ["ONE", 90],
-// ["FIVE", 55],
-// ["TEN", 20],
-// ["TWENTY", 60],
-// ["ONE HUNDRED", 100]]
-  
+
 console.log(
-  checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
+  checkCashRegister(8.11, 9, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
