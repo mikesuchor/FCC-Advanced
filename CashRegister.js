@@ -25,15 +25,15 @@ One-hundred Dollars	$100 (ONE HUNDRED)
 
 const checkCashRegister = (price, cash, cid) => {
   const denominations = [
-    ["onehundreddollars", 100],
-    ["twentydollars", 20],
-    ["tendollars", 10],
-    ["fivedollars", 5],
-    ["onedollar", 1],
-    ["quarter", 0.25],
-    ["dime", 0.1],
-    ["nickel", 0.05],
-    ["penny", 0.01]
+    ["ONE HUNDRED", 100],
+    ["TWENTY", 20],
+    ["TEN", 10],
+    ["FIVE", 5],
+    ["ONE", 1],
+    ["QUARTER", 0.25],
+    ["DIME", 0.1],
+    ["NICKEL", 0.05],
+    ["PENNY", 0.01]
   ];
   
   const output = {
@@ -52,21 +52,27 @@ const checkCashRegister = (price, cash, cid) => {
   };
 
   const calculateChange = (change) => {
+    let changeArr = [];
+    let numCoins = 0;
     for(let i = 0; i < denominations.length; i++) {
       if (change === 0) {
         
       };
-      if (change / denominations[i][1] > 0) {
+      if (change / denominations[i][1] >= 1) {
         while (change / denominations[i][1] >= 1) {
+          numCoins++;
           change -= denominations[i][1];
-          console.log(denominations[i][0]);
         }
+        changeArr.push([denominations[i][0], numCoins * denominations[i][1]]);
+        console.log("numCoins * denominations", numCoins * denominations[i][1]);
+        console.log("changeArr", changeArr);
       }
+      numCoins = 0;
     }
   }
 
-  console.log(cidTotal(cid));
-  console.log(change);
+  console.log("cidTotal", cidTotal(cid));
+  console.log("change", change);
 
   if (cidTotal(cid) < change) {
     output.status = "INSUFFICIENT FUNDS";
@@ -82,5 +88,5 @@ const checkCashRegister = (price, cash, cid) => {
 }
 
 console.log(
-  checkCashRegister(19.50, 20, [["PENNY", 0], ["NICKEL", 0], ["DIME", 0.4], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])
+  checkCashRegister(19.31, 20, [["PENNY", 0], ["NICKEL", 0], ["DIME", 0.4], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])
   );
