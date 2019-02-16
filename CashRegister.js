@@ -55,9 +55,6 @@ const checkCashRegister = (price, cash, cid) => {
     let changeArr = [];
     let numCoins = 0;
     for(let i = 0; i < denominations.length; i++) {
-      if (change === 0) {
-        
-      };
       if (change / denominations[i][1] >= 1) {
         while (change / denominations[i][1] >= 1) {
           numCoins++;
