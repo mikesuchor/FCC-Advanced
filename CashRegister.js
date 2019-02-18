@@ -24,37 +24,41 @@ One-hundred Dollars	$100 (ONE HUNDRED)
 */
 
 const checkCashRegister = (price, cash, cid) => {
-  const denominations = [
-    ["ONE HUNDRED", 100],
-    ["TWENTY", 20],
-    ["TEN", 10],
-    ["FIVE", 5],
-    ["ONE", 1],
-    ["QUARTER", 0.25],
-    ["DIME", 0.1],
-    ["NICKEL", 0.05],
-    ["PENNY", 0.01]
-  ];
+  const denominations = {
+    "PENNY": 0.01,
+    "NICKEL": 0.05,
+    "DIME": 0.10,
+    "QUARTER": 0.25,
+    "ONE": 1.00,
+    "FIVE": 5.00,
+    "TEN": 10.00,
+    "TWENTY": 20.00,
+    "ONE HUNDRED": 100
+  };
   
   const output = {
-    status: null,
+    status: "",
     change: []
   }
   
-  let change = (cash - price).toFixed(2);
-
+  const change = parseFloat(cash - price).toFixed(2);
+  
+  // Calculate total change in drawer
   const cidTotal = (cid) => {
-    let cidTotal = 0;
-    for(let i = 0; i < cid.length; i++) {
-      cidTotal += cid[i][1];
+    let total = 0;
+    for(let change of cid) {
+      total += change[1];
     }
-    return cidTotal.toFixed(2);
+    return total.toFixed(2);
   };
 
   const calculateChange = (change) => {
     let changeArr = [];
     let numCoins = 0;
-    for(let i = 0; i < denominations.length; i++) {
+    for(let i = cid.length - 1; i <= 0; i--) {
+      console.log("change", change);
+      console.log("cid", cid[i]);
+      console.log("change / cid", change / cid[i][1]);
       if (change / denominations[i][1] >= 1) {
         while (change / denominations[i][1] >= 1) {
           numCoins++;
@@ -71,7 +75,7 @@ const checkCashRegister = (price, cash, cid) => {
   console.log("cidTotal", cidTotal(cid));
   console.log("change", change);
 
-  if (cidTotal(cid) < change) {
+  if (cidTotal < change) {
     output.status = "INSUFFICIENT FUNDS";
     output.change = [];
   } else if (cidTotal(cid) === change) {
