@@ -41,6 +41,7 @@ const checkCashRegister = (price, cash, cid) => {
     return total.toFixed(2);
   };
 
+  // Calculate change due
   const calculateChange = (changeDue) => {
     let changeArr = [];
     let numCoins = 0;
