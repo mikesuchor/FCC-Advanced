@@ -15,8 +15,8 @@ For this challenge you will be presented with a string such as 800-692-7753 or 8
 function telephoneCheck(str) {
   /* Regular expression: start of word,(1,space optional)optional,((3 digits in parantheses) or (3 digits)),space optional,
   dash optional,(3 digits),space optional,dash optional,(4 digits),end of word */
-  var regexp = /^(1\s?)?(\(\d{3}\)|\d{3})\s?\-?(\d{3})\s?\-?(\d{4})$/;
+  let regexp = /^(1\s?)?(\(\d{3}\)|\d{3})\s?\-?(\d{3})\s?\-?(\d{4})$/;
   return (regexp.test(str));
 }
 
-console.log(telephoneCheck("555-555-5555"));
+telephoneCheck("555-555-5555");
